@@ -11,7 +11,7 @@ userRouter.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-   if(email ==="admin@zexweb.com"&& password ==="ankit@9090"){
+   if(email === process.env.email && password === process.env.pass){
 
     const token = await jwt.sign(
       { email },
