@@ -19,12 +19,11 @@ businessRouter.get("/", async (req, res) => {
 });
 
 businessRouter.post("/addbusiness", async (req, res) => {
-  let { name, email, businessdata, service, phone, status } = req.body;
+  let { name, email, service, phone, status } = req.body;
   try {
     const contact = new business({
       name,
       email,
-      businessdata,
       service,
       phone,
       status
