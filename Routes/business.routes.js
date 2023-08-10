@@ -19,7 +19,7 @@ businessRouter.get("/", async (req, res) => {
 });
 
 businessRouter.post("/addbusiness", async (req, res) => {
-  let { name, email, message, phone, status, date, time} = req.body;
+  let { name, email, service, phone, status, date, time} = req.body;
   try {
     function get_date() {
       let date = new Date();
