@@ -7,7 +7,10 @@ const contactSchema = mongoose.Schema(
       message: { type: String, required: true },
       phone: { type: String, required: true },
       status: { type: String },
-      createdAt: { type: Date, default: Date.now }
+      finaldate: { type: String },
+      finaltime: { type: String }
+      // ,
+      // createdAt: { type: Date, default: Date.now }
     },
     {
       versionKey: false

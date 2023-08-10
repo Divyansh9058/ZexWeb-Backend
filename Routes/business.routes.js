@@ -19,14 +19,34 @@ businessRouter.get("/", async (req, res) => {
 });
 
 businessRouter.post("/addbusiness", async (req, res) => {
-  let { name, email, service, phone, status } = req.body;
+  let { name, email, message, phone, status, date, time} = req.body;
   try {
+    function get_date() {
+      let date = new Date();
+      var year = date.getFullYear();
+      var mes = date.getMonth() + 1;
+      var dia = date.getDate();
+      var today = dia + "-" + mes + "-" + year;
+      return today;
+    }
+    function get_time(){
+      let date= new Date();    
+      let hours= date.getHours();
+      let mins= date.getMinutes();
+      let sec= date.getSeconds();
+      var time = hours+":"+mins+":"+sec;
+      return time;
+  }
+    const finaldate = get_date();
+    const finaltime = get_time();
     const contact = new business({
       name,
       email,
       service,
       phone,
-      status
+      status,
+      finaldate,
+      finaltime
     });
     await contact.save();
     res.send({ msg: "Business Contact has been added" });
