@@ -31,14 +31,16 @@ contactUsRouter.post("/addcontact", async (req, res) => {
     }
     function get_time(){
       let date = new Date();
-    let utc = date.getTime() + (date.getTimezoneOffset() * 60000); // Convert to UTC time
-    let istOffset = 5.5 * 60 * 60 * 1000; // IST offset in milliseconds
-    let istTime = new Date(utc + istOffset);
-    let hours = istTime.getHours();
-    let mins = istTime.getMinutes();
-    let sec = istTime.getSeconds();
-    var time = hours + ":" + mins + ":" + sec;
-    return time;
+      let utc = date.getTime() + (date.getTimezoneOffset() * 60000); // Convert to UTC time
+      let istOffset = 5.5 * 60 * 60 * 1000; // IST offset in milliseconds
+      let istTime = new Date(utc + istOffset);
+      let hours = istTime.getHours();
+      let mins = istTime.getMinutes();
+      let ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // Convert 0 to 12
+      var time = hours + ":" + mins + " " + ampm;
+      return time;
   }
     const finaldate = get_date();
     const finaltime = get_time();
