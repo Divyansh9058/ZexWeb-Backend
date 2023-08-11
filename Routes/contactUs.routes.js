@@ -71,6 +71,21 @@ contactUsRouter.patch("/editcontact/:id", async (req, res) => {
   }
 });
 
+contactUsRouter.get("/filter", async (req, res) => {
+  const{Sdate,Edate}=req.body;
+    
+  try {
+      let sdate= new Date(Sdate).toISOString();
+  let edate= new Date(Edate).toISOString();
+  console.log(sdate, edate);
+  let data= await contactUs.find({finaldate:{$gte:sdate,$lte:edate}});
+  res.send(data)
+  } catch (err) {
+      res.send({msg:err.message})
+  } 
+});
+
+
 contactUsRouter.delete("/delete/:id", async (req, res) => {
   try {
     const contactID = req.params.id;

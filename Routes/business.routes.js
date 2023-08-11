@@ -71,6 +71,25 @@ businessRouter.patch("/editbusiness/:id", async (req, res) => {
   }
 });
 
+businessRouter.get("/filter", async (req, res) => {
+  
+  const{Sdate,Edate}=req.body;
+    
+  try {
+  let sdate= new Date(Sdate).toISOString();
+  let edate= new Date(Edate).toISOString();
+  console.log(sdate, edate);
+  let data= await business.find({finaldate:{$gte:sdate,$lte:edate}});
+  res.send(data)
+  } catch (err) {
+      res.send({msg:err.message})
+  } 
+
+});
+
+
+
+
 businessRouter.delete("/delete/:id", async (req, res) => {
   try {
     const contactID = req.params.id;
