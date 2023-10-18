@@ -7,7 +7,7 @@ const businessSchema = mongoose.Schema(
       service: { type: String, required: true },
       phone: { type: String, required: true },
       status: { type: String },
-      finaldate: {type: Date,default: Date.now},
+      // finaldate: {type: Date,default: Date.now},
       finaltime: { type: String }
     },
     {
