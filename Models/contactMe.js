@@ -8,7 +8,7 @@ const contactSchema = mongoose.Schema(
       phone: { type: String, required: true },
       status: { type: String },
       // finaldate: {type: Date,default: Date.now},
-
+      finaldate: { type: String },
       finaltime: { type: String }
       // ,
       // createdAt: { type: Date, default: Date.now }
