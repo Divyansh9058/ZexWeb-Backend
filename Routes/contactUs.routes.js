@@ -1,5 +1,5 @@
 const express = require("express");
-const { contactUs } = require("../Models/contactMe");
+const { contactus } = require("../Models/contactMe");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -11,7 +11,7 @@ const contactUsRouter = express.Router();
 
 contactUsRouter.get("/", async (req, res) => {
   try {
-    const userdata = await contactUs.find();
+    const userdata = await contactus.find();
     res.send(userdata);
   } catch (err) {
     res.send({ msg: err.message });
@@ -44,7 +44,7 @@ contactUsRouter.post("/addcontact", async (req, res) => {
   }
     const finaldate = get_date();
     const finaltime = get_time();
-    const contact = new contactUs({
+    const contact = new contactus({
       name,
       email,
       message,
@@ -64,7 +64,7 @@ contactUsRouter.patch("/editcontact/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const payload = req.body;
-    await contactUs.findByIdAndUpdate(id, payload);
+    await contactus.findByIdAndUpdate(id, payload);
     res.send({ msg: "Status updated" });
   } catch (error) {
     res.send({ msg: "Something went wrong", error: error.message });
@@ -78,7 +78,7 @@ contactUsRouter.get("/filter", async (req, res) => {
       let sdate= new Date(Sdate).toISOString();
   let edate= new Date(Edate).toISOString();
   console.log(sdate, edate);
-  let data= await contactUs.find({finaldate:{$gte:sdate,$lte:edate}});
+  let data= await contactus.find({finaldate:{$gte:sdate,$lte:edate}});
   res.send(data)
   } catch (err) {
       res.send({msg:err.message})
@@ -89,7 +89,7 @@ contactUsRouter.get("/filter", async (req, res) => {
 contactUsRouter.delete("/delete/:id", async (req, res) => {
   try {
     const contactID = req.params.id;
-    await contactUs.findByIdAndDelete({ _id: contactID });
+    await contactus.findByIdAndDelete({ _id: contactID });
     res.send({ msg: "Data deleted" });
   } catch (err) {
     res.send({ msg: err.message });
